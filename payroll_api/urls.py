@@ -12,7 +12,7 @@ urlpatterns = [
     path('partial-user-edit/<int:user_id>/', user_views.PartialUpdateUser, name='partial_update_user'),
     path('delete-user/<int:user_id>/', user_views.deleteUser, name='delete-users'),
 
-    path('upload-calon-karyawan', calon_karyawan_views.createCalonKaryawan.as_view(), name='upload-cv'),
+    path('upload-calon-karyawan', calon_karyawan_views.createCalonKaryawan.as_view(), name='upload-keryawan'),
 
     path('create-departement/', departement_views.createdepartement, name='create-departement'),
 ]
