@@ -3,6 +3,7 @@ from django.urls import path
 from api.views import user_views
 from api.views import calon_karyawan_views
 from api.views import departement_views
+from api.views import karyawan_views
 
 urlpatterns = [
     path('all-users/', user_views.getUsers, name='get-users'),
@@ -15,4 +16,7 @@ urlpatterns = [
     path('upload-calon-karyawan', calon_karyawan_views.createCalonKaryawan.as_view(), name='upload-cv'),
 
     path('create-departement/', departement_views.createdepartement, name='create-departement'),
+
+    path('create-karyawan/', karyawan_views.createKaryawan.as_view(), name='create-karyawan')  
+
 ]

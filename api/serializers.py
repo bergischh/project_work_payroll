@@ -3,6 +3,7 @@ from .models.user_models import Users
 from .models.calonkaryawan_models import calonKaryawan
 from .models.departement_models import departement
 from django.utils import timezone
+from .models.karyawan_models import karyawan
 
 class UsersSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -46,6 +47,28 @@ class calonKaryawanSerializers(serializers.ModelSerializer) :
         instance.upload_at = timezone.now()
         return super().update(instance, validated_data)
     
+class karyawanSerializers(serializers.ModelSerializer) :
+      class Meta :
+        model = karyawan
+        fields = '__all__'
+
+        def update(self, instance, validate_data) :
+            instance.role = validate_data.get('role', instance.role)
+            instance.nik = validate_data.get('nik', instance.nik)
+            instance.nama_karyawan = validate_data('nama_karyawan', instance.nama_karyawan)
+            instance.tempat_lahir = validate_data('tempat_lahir', instance.tempat_lahir)
+            instance.tanggal_lahir = validate_data('tanggal_lahir', instance.tanggal_lahir)
+            instance.agama = validate_data('agama', instance.agama)
+            instance.status = validate_data('status', instance.status)
+            instance.jumlah_anak = validate_data('jumlah_anak', instance.jumlah_anak)
+            instance.alamat = validate_data('alamat', instance.alamat)
+            instance.no_telpon = validate_data('no_telpon', instance.no_telpon)
+            instance.email = validate_data('email', instance.email)
+            instance.jabatan = validate_data('jabatan', instance.jabatan)
+            instance.foto = validate_data('foto', instance.foto)
+            
+            return instance
+    
 class DepartementSerializers(serializers.ModelSerializer) :
         class Meta : 
             model = departement
@@ -56,3 +79,4 @@ class DepartementSerializers(serializers.ModelSerializer) :
         def update(self, instance, validate_data) :
             instance.nama_departement = validate_data.get('nama_departement', instance.nama_departement)
             return instance
+        
