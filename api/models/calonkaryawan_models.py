@@ -30,7 +30,7 @@ class calonKaryawan(models.Model) :
     status_wawancara = models.CharField(max_length=20, choices=StatusWawancara.choices, default=None)
     upload_at = models.DateTimeField(null=True, blank=True)
     
-     # relasi ke tabel karyawan
+     # relasi ke tabel users
     user = models.ForeignKey('Users', on_delete=models.CASCADE, related_name='calon_karyawan', null=True, blank=True)
  
 

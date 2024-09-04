@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from api.models import calonKaryawan
+# from api.models import calonKaryawan
+# from api.models import periodePenggajian
+# from api.models import departement
 
-admin.site.register(calonKaryawan)
+# admin.site.register(calonKaryawan)
+# admin.site.register(periodePenggajian)
+# admin.site.register(departement)
+
 urlpatterns = [
     path('api/', include('payroll_api.urls')),
     path('admin/', admin.site.urls),

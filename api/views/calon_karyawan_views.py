@@ -1,20 +1,53 @@
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from django.shortcuts import render
+from rest_framework.decorators import api_view
+from django.shortcuts import get_object_or_404
+
 from ..serializers import calonKaryawanSerializers
 from ..models.calonkaryawan_models import calonKaryawan
 
-class createCalonKaryawan(APIView) :
-    serializer_class = calonKaryawanSerializers
+@api_view(['GET'])
+def getCalonKaryawan(request) :
+    querySet = calonKaryawan.objects.all()
+    serializer = calonKaryawanSerializers(querySet, many = True)
+
+    return Response({
+        "data": serializer.data
+    })
+
+@api_view(['POST'])
+def createCalonKaryawan(request) :
+    serializer = calonKaryawanSerializers(data=request.data)
     parser_classes = [MultiPartParser, FormParser]
+    if serializer.is_valid() :
+        serializer.save()
+        return Response({
+            "message" : "Berhasil menambah data",
+            "data" : serializer.data
+        }, status=status.HTTP_201_CREATED)
+    return Response({
+        "errors" : serializer._errors
+    }, status=status.HTTP_400_BAD_REQUEST)
 
-    def post(self, request) :
-        request.user = calonKaryawan.objects.first()
-        serializer = self.serializer_class(request.user, data=request.data)
-        if serializer.is_valid() :
-            serializer.save()
-            return Response(serializer.data)
+@api_view(['PUT'])
+def editCalonKaryawan(request, id) :
+    pewawancara = get_object_or_404(calonKaryawan, id=id)
+    serializer = calonKaryawanSerializers(pewawancara, data=request)
+    if serializer.is_valid() : 
+        serializer.save()
+        return Response({
+            "message" : "Berhasil mengubah data",
+            "data" : serializer.data
+        }, status=status.HTTP_200_OK)
+    return Response({
+        "errors" : serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['DELETE'])
+def deleteCalonKaryawan(request, id) :
+    pewawancara = get_object_or_404(calonKaryawan, id=id)
+    pewawancara.delete()
+    return Response({
+        "message" : "Data telah berhasil dihapus"
+    }, status=status.HTTP_204_NO_CONTENT)
