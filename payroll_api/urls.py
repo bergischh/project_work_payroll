@@ -23,6 +23,9 @@ urlpatterns = [
 
     # url untuk karyawan
     path('create-karyawan/', karyawan_views.createKaryawan.as_view(), name='create-karyawan'),
+    path('karyawan-edit/<int:id>/', karyawan_views.editKaryawan, name='edit-karyawan'),
+    path('karyawan-all/', karyawan_views.getKaryawan, name='get-karyawan'),
+    path('karyawan-delete/<int:id>/', karyawan_views.deleteKaryawan, name='delete-karyawan'),
 
     # url untuk departement
     path('all-departement/', departement_views.getdepartement, name='get-departement'),
