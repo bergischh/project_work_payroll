@@ -5,6 +5,7 @@ from api.views import calon_karyawan_views
 from api.views import departement_views
 from api.views import karyawan_views
 from api.views import periodGaji_views
+from api.views import tunjangan_views
 
 urlpatterns = [
     # url untuk user
@@ -22,7 +23,7 @@ urlpatterns = [
     path('delete-pewawancara/<int:id>/', calon_karyawan_views.deleteCalonKaryawan, name='delete-pewawancara'),
 
     # url untuk karyawan
-    path('create-karyawan/', karyawan_views.createKaryawan.as_view(), name='create-karyawan'),
+    path('create-karyawan/', karyawan_views.createKaryawan, name='create-karyawan'),
     path('karyawan-edit/<int:id>/', karyawan_views.editKaryawan, name='edit-karyawan'),
     path('karyawan-all/', karyawan_views.getKaryawan, name='get-karyawan'),
     path('karyawan-delete/<int:id>/', karyawan_views.deleteKaryawan, name='delete-karyawan'),
@@ -37,7 +38,14 @@ urlpatterns = [
     path('get-periodegaji/', periodGaji_views.getPeriodeGaji, name='get-periodegaji'),
     path('create-periodegaji/', periodGaji_views.postPeriodeGaji, name='create-periodegaji'),
     path('edit-periodegaji/<int:id>/', periodGaji_views.editPeriodeGaji, name='edit-periodegaji'),
-    path('delete-periodegaji/<int:id>/', periodGaji_views.deletePeriodeGaji, name='delete-periodegaji')
+    path('delete-periodegaji/<int:id>/', periodGaji_views.deletePeriodeGaji, name='delete-periodegaji'),
+
+    # url untuk tunjangan karyawan
+    path('get-tunjangan/', tunjangan_views.getTunjangan, name='get-tunjangan'),
+    path('create-tunjangan/', tunjangan_views.postTunjangan, name='create-tunjangan'),
+    path('edit-tunjangan/<int:id>/', tunjangan_views.editTunjangan, name='edit-tunjangan'),
+    path('delete-tunjangan/<int:id>/', tunjangan_views.deleteTunjangan, name='delete-tunjangan'),
+
 
 
 

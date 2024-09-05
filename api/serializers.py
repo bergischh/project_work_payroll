@@ -4,6 +4,7 @@ from .models.calonkaryawan_models import calonKaryawan
 from .models.departement_models import departement
 from .models.karyawan_models import karyawan
 from .models.periodGaji_models import periodePenggajian
+from .models.tunjangan_models import tunjanganKaryawan
 from django.utils import timezone
 
 class UsersSerializer(serializers.ModelSerializer) :
@@ -95,5 +96,22 @@ class PeriodeGajiSerializers(serializers.ModelSerializer) :
         )
         periode.save()
         return periode
+    
+class tunjanganSerializers(serializers.ModelSerializer) :
+    class Meta :
+        model = tunjanganKaryawan
+        fields = '__all__'
+
+    def update(self, instance, validate_data):
+        instance.tunjangan_makan = validate_data.get('tunjangan_makan', instance.tunjangan_makan)
+        instance.tunjangan_kesehatan = validate_data.get('tunjangan_kesehatan', instance.tunjangan_kesehatan)
+        instance.tunjangan_jabatan = validate_data.get('tunjangan_jabatan', instance.tunjangan_jabatan)
+        instance.THR = validate_data.get('THR', instance.THR)
+        instance.bonus = validate_data.get('bonus', instance.bonus)
+        
+        instance.save()  # Jangan lupa untuk menyimpan perubahan ke database.
+        
+        return instance
+
 
         
