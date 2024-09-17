@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 
-from ..serializers import calonKaryawanSerializers
-from ..models.calonkaryawan_models import calonKaryawan
+from ..serializers import CalonKaryawanSerializers
+from ..models.calonkaryawan_models import CalonKaryawan
 
 @api_view(['GET'])
 def getCalonKaryawan(request) :
-    querySet = calonKaryawan.objects.all()
-    serializer = calonKaryawanSerializers(querySet, many = True)
+    querySet = CalonKaryawan.objects.all()
+    serializer = CalonKaryawanSerializers(querySet, many = True)
 
     return Response({
         "data": serializer.data
@@ -18,7 +18,7 @@ def getCalonKaryawan(request) :
 
 @api_view(['POST'])
 def createCalonKaryawan(request) :
-    serializer = calonKaryawanSerializers(data=request.data)
+    serializer = CalonKaryawanSerializers(data=request.data)
     parser_classes = [MultiPartParser, FormParser]
     if serializer.is_valid() :
         serializer.save()
@@ -32,8 +32,8 @@ def createCalonKaryawan(request) :
 
 @api_view(['PUT'])
 def editCalonKaryawan(request, id) :
-    pewawancara = get_object_or_404(calonKaryawan, id=id)
-    serializer = calonKaryawanSerializers(pewawancara, data=request)
+    pewawancara = get_object_or_404(CalonKaryawan, id=id)
+    serializer = CalonKaryawanSerializers(pewawancara, data=request.data)
     if serializer.is_valid() : 
         serializer.save()
         return Response({
@@ -46,7 +46,7 @@ def editCalonKaryawan(request, id) :
 
 @api_view(['DELETE'])
 def deleteCalonKaryawan(request, id) :
-    pewawancara = get_object_or_404(calonKaryawan, id=id)
+    pewawancara = get_object_or_404(CalonKaryawan, id=id)
     pewawancara.delete()
     return Response({
         "message" : "Data telah berhasil dihapus"

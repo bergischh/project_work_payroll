@@ -1,6 +1,7 @@
 from django.db import models
+from .user_models import Users
 
-class calonKaryawan(models.Model) : 
+class CalonKaryawan(models.Model) : 
     class JenisKelamin(models.TextChoices) :
         laki_laki = 'laki_laki', 'Laki Laki'
         perempuan = 'perempuan', 'Perempuan'
@@ -13,6 +14,7 @@ class calonKaryawan(models.Model) :
         diterima = 'diterima', 'Diterima'
         tidak_diterima = 'tidak_diterima', 'Tidak Diterima'
 
+    id = models.AutoField(primary_key=True)
     nik = models.IntegerField()
     nama_karyawan = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
@@ -21,7 +23,7 @@ class calonKaryawan(models.Model) :
     jenis_kelamin = models.CharField(max_length=10, choices=JenisKelamin.choices, default=None)
     agama = models.CharField(max_length=100)
     status = models.CharField(max_length=50, choices=Status.choices, default=None)
-    jumlah_anak = models.CharField(max_length=50)
+    jumlah_anak = models.IntegerField()
     alamat = models.CharField(max_length=100)
     no_telephone = models.IntegerField()
     photo = models.ImageField(upload_to='images_profile/', null=True, blank=True)
@@ -31,7 +33,8 @@ class calonKaryawan(models.Model) :
     upload_at = models.DateTimeField(null=True, blank=True)
     
      # relasi ke tabel users
-    user = models.ForeignKey('Users', on_delete=models.CASCADE, related_name='calon_karyawan', null=True, blank=True)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='calon_karyawan', null=True, blank=True)
+
  
 
 

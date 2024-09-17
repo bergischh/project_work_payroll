@@ -1,13 +1,13 @@
-from ..models.departement_models import departement
 from rest_framework.response import Response
-from api.serializers import DepartementSerializers
-from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
+from api.serializers import DepartementSerializers
+from ..models.departement_models import Departement
 
 @api_view(['GET'])
 def getdepartement(request) : 
-    querySet = departement.objects.all()
+    querySet = Departement.objects.all()
     serializer = DepartementSerializers(querySet, many = True)
 
     return Response({
@@ -29,7 +29,7 @@ def createdepartement(request) :
 
 @api_view(['PUT'])
 def editDepartement(request, id) : 
-    departemen = get_object_or_404(departement, id=id)
+    departemen = get_object_or_404(Departement, id=id)
     serializer = DepartementSerializers(departemen, data=request.data)
     if serializer.is_valid() :
         serializer.save()
@@ -42,9 +42,9 @@ def editDepartement(request, id) :
     }, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE']) 
-def deleteDepartement(id) : 
-    departemen = get_object_or_404(departement, id=id)
-    departement.delete()
+def deleteDepartement(request, id) : 
+    departemen = get_object_or_404(Departement, id=id)
+    departemen.delete()
     return Response({
         "message" : "Berhasil menghapus data"
     }, status=status.HTTP_204_NO_CONTENT)

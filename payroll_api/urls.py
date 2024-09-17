@@ -6,6 +6,12 @@ from api.views import departement_views
 from api.views import karyawan_views
 from api.views import periodGaji_views
 from api.views import tunjangan_views
+from api.views import pinjamanKaryawan_views
+from api.views import laporangaji_views
+from api.views import kehadirankaryawan_views
+from api.views import slipgaji_views
+from api.views import transaksipembayaran_views
+
 
 urlpatterns = [
     # url untuk user
@@ -31,7 +37,7 @@ urlpatterns = [
     # url untuk departement
     path('all-departement/', departement_views.getdepartement, name='get-departement'),
     path('create-departement/', departement_views.createdepartement, name='create-departement'),
-    path('edit-depatement/<int:id>/', departement_views.editDepartement, name='edit-departement'),
+    path('edit-departement/<int:id>/', departement_views.editDepartement, name='edit-departement'),
     path('delete-departement/<int:id>/', departement_views.deleteDepartement, name='delete-departement'),
 
     # url untuk periode penggajian
@@ -46,6 +52,35 @@ urlpatterns = [
     path('edit-tunjangan/<int:id>/', tunjangan_views.editTunjangan, name='edit-tunjangan'),
     path('delete-tunjangan/<int:id>/', tunjangan_views.deleteTunjangan, name='delete-tunjangan'),
 
+    # url untuk pinjaman karyawan 
+    path('all-pinjaman/', pinjamanKaryawan_views.getPinjamanKaryawan, name='get-pinjaman'),
+    path('create-pinjaman/', pinjamanKaryawan_views.postPinjaman, name='create-pinjaman'),
+    path('edit-pinjaman/<int:id>/', pinjamanKaryawan_views.updatePinjaman, name='ediit-pinjaman'),
+    path('delete-pinjaman/<int:id>/', pinjamanKaryawan_views.deletePinjaman, name='delete-pinnjaman'),
+
+    # url untuk laporan penggajian 
+    path('all-laporan-penggajian/', laporangaji_views.getLaporanGaji, name='get-laporan'),
+    path('create-laporan-gaji/', laporangaji_views.postLaporanGaji, name='create-laporan'),
+    path('edit-laporan-karyawan/<int:id>/', laporangaji_views.updateLaporanGaji, name='edit-laporan'),
+    path('delete-laporan-gaji/<int:id>/', laporangaji_views.deleteLaporanGaji, name='delete-laporan'),
+
+    # url untuk kehadiran karyawan 
+    path('all-kehadiran-karyawan/', kehadirankaryawan_views.getKehadiranKaryawan, name='get-kehadiran'),
+    path('create-kehadiran-karyawan/', kehadirankaryawan_views.postKehadiranKaryawan, name='create-kehadiran-karyawan'),
+    path('edit-kehadiran-karyawan/<int:id>/', kehadirankaryawan_views.updateKehadiranKaryawan, name='edit-kehadiran'),
+    path('delete-kehadiran-karyawan/<int:id>/', kehadirankaryawan_views.deleteKehadiranKaryawan, name='delete-kehadiran'),
+
+    # url untuk slip gaji
+    path('all-slip-gaji/', slipgaji_views.getSlipGaji, name='get-slipgaji'),
+    path('create-slip-gaji/', slipgaji_views.postSlipGaji, name='create-slip-gaji'),
+    path('edit-slip-gaji/<int:id>/', slipgaji_views.updateTransaksi, name='edit-slip-gaji'),
+    path('delete-slip-gaji/<int:id>/', slipgaji_views.deletetransaksi, name='delete-slip-gaji'),
+   
+    # url untuk transaksi pinjaman
+    path('all-transaksi/', transaksipembayaran_views.getTransaksi, name='get-transaksi'),
+    path('create-transaksi/', transaksipembayaran_views.postTransaksi, name='create-transaksi'),
+    path('edit-transaksi/<int:id>/', transaksipembayaran_views.updateTransaksi, name='create-transaksi'),
+    path('delete-transaksi/<int:id>/', transaksipembayaran_views.deletetransaksi, name='delete-transaksi')
 
 
 
