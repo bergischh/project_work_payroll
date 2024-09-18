@@ -8,3 +8,4 @@ from .pinjamankaryawan_models import PinjamanKaryawan
 from .laporanpenggajian_models import LaporanPenggajian
 from .kehadirankaryawan_models import KehadiranKaryawan
 from .slipgaji_models import SlipGaji
+from .transaksi_pembayaran_pinjaman import TransaksiPinjaman

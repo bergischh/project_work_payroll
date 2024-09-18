@@ -13,6 +13,7 @@ from api.views import slipgaji_views
 from api.views import transaksipembayaran_views
 
 
+
 urlpatterns = [
     # url untuk user
     path('all-users/', user_views.getUsers, name='get-users'),
@@ -81,6 +82,9 @@ urlpatterns = [
     path('create-transaksi/', transaksipembayaran_views.postTransaksi, name='create-transaksi'),
     path('edit-transaksi/<int:id>/', transaksipembayaran_views.updateTransaksi, name='create-transaksi'),
     path('delete-transaksi/<int:id>/', transaksipembayaran_views.deletetransaksi, name='delete-transaksi')
+
+    # url untuk sign up
+  
 
 
 
